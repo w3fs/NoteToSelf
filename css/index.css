@@ -67,12 +67,22 @@ h1{
     display: block;
     margin: .25em;
     text-align: center;
-    background: -webkit-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%);
     border-radius: .15em;
     position: relative;
     box-shadow: none;
     text-shadow: none;
     transition: all .25s linear;
+    /**
+     * Cross-browser gradients
+     */
+    background: #fcfff4;
+    background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(40%,#dfe5d7), color-stop(100%,#b3bead));
+    background: -webkit-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); 
+    background: -o-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%);
+    background: -ms-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%);
+    background: linear-gradient(to bottom, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
 }
 
 .button:hover{
@@ -179,30 +189,3 @@ h1{
     #actions li{float: left; width: 23.8%; margin: 1% 0 .5% 1%;}
     #actions li:last-child{}
 }
-
-/* 
-@media only screen and (min-width: 18em) { h1 { font-size: 2em; line-height: 1.25em; } }
-@media only screen and (min-width: 19em) { h1 { font-size: 2.090909090909091em; line-height: 1.2414772727272727em; } }
-@media only screen and (min-width: 20em) { h1 { font-size: 2.1818181818181817em; line-height: 1.2329545454545454em; } }
-@media only screen and (min-width: 21em) { h1 { font-size: 2.2727272727272725em; line-height: 1.2244318181818181em; } }
-@media only screen and (min-width: 22em) { h1 { font-size: 2.3636363636363638em; line-height: 1.2159090909090908em; } }
-@media only screen and (min-width: 23em) { h1 { font-size: 2.4545454545454546em; line-height: 1.2073863636363635em; } }
-@media only screen and (min-width: 24em) { h1 { font-size: 2.5454545454545454em; line-height: 1.1988636363636365em; } }
-@media only screen and (min-width: 25em) { h1 { font-size: 2.6363636363636362em; line-height: 1.1903409090909092em; } }
-@media only screen and (min-width: 26em) { h1 { font-size: 2.7272727272727275em; line-height: 1.1818181818181819em; } }
-@media only screen and (min-width: 27em) { h1 { font-size: 2.8181818181818183em; line-height: 1.1732954545454546em; } }
-@media only screen and (min-width: 28em) { h1 { font-size: 2.909090909090909em; line-height: 1.1647727272727273em; } }
-@media only screen and (min-width: 29em) { h1 { font-size: 3em; line-height: 1.15625em; } }
-@media only screen and (min-width: 30em) { h1 { font-size: 3.090909090909091em; line-height: 1.1477272727272727em; } }
-@media only screen and (min-width: 31em) { h1 { font-size: 3.1818181818181817em; line-height: 1.1392045454545454em; } }
-@media only screen and (min-width: 32em) { h1 { font-size: 3.2727272727272725em; line-height: 1.1306818181818181em; } }
-@media only screen and (min-width: 33em) { h1 { font-size: 3.3636363636363633em; line-height: 1.1221590909090908em; } }
-@media only screen and (min-width: 34em) { h1 { font-size: 3.4545454545454546em; line-height: 1.1136363636363638em; } }
-@media only screen and (min-width: 35em) { h1 { font-size: 3.5454545454545454em; line-height: 1.1051136363636365em; } }
-@media only screen and (min-width: 36em) { h1 { font-size: 3.6363636363636367em; line-height: 1.0965909090909092em; } }
-@media only screen and (min-width: 37em) { h1 { font-size: 3.7272727272727275em; line-height: 1.0880681818181819em; } }
-@media only screen and (min-width: 38em) { h1 { font-size: 3.8181818181818183em; line-height: 1.0795454545454546em; } }
-@media only screen and (min-width: 39em) { h1 { font-size: 3.909090909090909em; line-height: 1.0710227272727273em; } }
-@media only screen and (min-width: 40em) { h1 { font-size: 4em; line-height: 1.0625em; } }
-
-*/
