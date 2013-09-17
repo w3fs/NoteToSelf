@@ -7,7 +7,7 @@
  * Mobile-first design approach. Media queries for larger screens opposed to the other way around
  */
 
-h1{
+h1{ /* Google Webfont API */
     font-family:'BenchNine', sans-serif; 
     font-size:2em; 
     line-height: 1.25em;
@@ -32,6 +32,7 @@ h1{
     color: #1D171F;
     padding:0.4em;
     border-radius: 2px;
+    text-shadow: 1px 1px #c2ad9a;
     text-shadow: 1px 1px rgba(255, 255, 255, 0.25);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -50,8 +51,16 @@ h1{
     color: rgba(255,0,0,0.5);
     cursor: pointer;
     font-weight: bolder;
-    transition: color .25s linear;
     font-family:cursive;
+    
+    /**
+     * Cross-browser CSS3 transitions
+     */
+    -webkit-transition: color .25s linear;
+    -moz-transition: color .25s linear;
+    -ms-transition: color .25s linear;
+    -o-transition: color .25s linear;
+    transition: color .25s linear;
 }
 
 .close:hover{
@@ -133,7 +142,9 @@ h1{
     box-sizing: border-box; 
     resize: none; 
     min-height: 50px;
+    border-color: #6d6660;
     border: 1px solid rgba(0,0,0,0.5);
+    background: #d7cdc1;
     background: rgba(255,255,255,0.5);
 }
 
@@ -165,5 +176,4 @@ h1{
     h1{font-size:4em; line-height: 1.5em;}
     .note{width: 23.8%; float: left; margin: 1% 0 1% 1%;}
     #actions li{float: left; width: 23.8%; margin: 1% 0 .5% 1%;}
-    #actions li:last-child{}
 }
