@@ -48,6 +48,7 @@ h1{ /* Google Webfont API */
     position: absolute;
     top: 0;
     right: 0.35em;
+    color: #df6558;
     color: rgba(255,0,0,0.5);
     cursor: pointer;
     font-weight: bolder;
@@ -80,6 +81,13 @@ h1{ /* Google Webfont API */
     position: relative;
     box-shadow: none;
     text-shadow: none;
+    /**
+     * Cross-browser gradients
+     */
+    -webkit-transition: all .25s linear;
+    -moz-transition: all .25s linear;
+    -ms-transition: all .25s linear;
+    -o-transition: all .25s linear;
     transition: all .25s linear;
     /**
      * Cross-browser gradients
@@ -118,12 +126,16 @@ h1{ /* Google Webfont API */
     left: 50%; 
     margin: 1em 0 0 -28%;
     z-index: 1;
-    color: black;
+    color: #000;
     top: -500%;
     padding: 1em;
     border-radius: 1em;
-    transition: all .25s ease;
     opacity: 0;
+    -webkit-transition: all .25s ease;
+    -moz-transition: all .25s ease;
+    -ms-transition: all .25s ease;
+    -o-transition: all .25s ease;
+    transition: all .25s ease;
 }
 
 #saveInfo:before, #loadInfo:before{
