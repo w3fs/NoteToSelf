@@ -5,7 +5,7 @@ class userNotes{
     /**
      * Database connection credentials
      */
-    public $dbUser = 'kurtisde_root';
+    public $dbUser = 'root';
     public $dbPass = 'sk8jager';
     public $dbHost = 'localhost';
     public $dbPort = null;
@@ -14,7 +14,7 @@ class userNotes{
      * Name of the database we will be connecting to
      * @var string 
      */
-    public $dbDatabase = 'kurtisde_notetoself';
+    public $dbDatabase = 'notetoself';
     
     /**
      * Data source name for connecting to PDO. @see self::generateDSN();

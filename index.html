@@ -103,7 +103,7 @@
             $("#saveNotes").click(function(){
                 $.ajax({
                     type: "POST",
-                    url: 'user.php',
+                    url: 'php/user.php',
                     data: {action: "save", notes: NoteToSelf.getStorage()},
                     beforeSend: function(){
                         $('#saveInfo').animate({
@@ -126,7 +126,7 @@
             $("#loadNotes").click(function(){
                 $.ajax({
                     type: "POST",
-                    url: 'user.php',
+                    url: 'php/user.php',
                     data: {action: "load", notes: NoteToSelf.getStorage()},
                     beforeSend: function(){
                         $('#loadInfo').animate({
