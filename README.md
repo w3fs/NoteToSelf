@@ -1,6 +1,6 @@
 ## Kurtis Key's Code Sample
 
-This quick code sample is a complete mobile-ready responsive 'ToDo' application. Built using a mobile-first approach, and The then implementing media queries for larger displays later in the development process, the design works well on any size screen.
+This quick code sample is a complete mobile-ready responsive 'ToDo' application. Built using a mobile-first approach, and implementing media queries for larger displays later in the development process, the design works well on any size screen.
 
 This project was completed using HTML5, CSS3, JavaScript+jQuery, and PHP. 
 
