@@ -1,0 +1,208 @@
+/*
+ * Import basic reset
+ */
+@import "reset.css";
+
+/**
+ * Mobile-first design approach. Media queries for larger screens opposed to the other way around
+ */
+
+h1{
+    font-family:'BenchNine', sans-serif; 
+    font-size:2em; 
+    line-height: 1.25em;
+    text-align: center;
+}
+
+.title{
+    background: #1D171F;
+    border-bottom: 1px solid #261E29;
+}
+
+/* Clear fix using pseudo-element */
+.title:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.note{
+    width: 98%;
+    margin: 1% 1% 1% 1%;
+    color: #1D171F;
+    padding:0.4em;
+    border-radius: 2px;
+    text-shadow: 1px 1px rgba(255, 255, 255, 0.25);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+     box-sizing: border-box;
+     border: 1px solid rgba(0,0,0,0.25);
+     box-shadow: 2px 6px 2px -5px rgba(0,0,0,0.5);
+     min-height: 100px;
+     background: #B39C85;
+     position: relative;
+}
+
+.close{
+    position: absolute;
+    top: 0;
+    right: 0.35em;
+    color: rgba(255,0,0,0.5);
+    cursor: pointer;
+    font-weight: bolder;
+    transition: color .25s linear;
+    font-family:cursive;
+}
+
+.close:hover{
+    color: red;
+}
+
+.button{
+    font-size:1.3em;
+    color: #1D171F;
+    line-height:1.25em;
+    padding: 0.5em 3em 0.5em 2em;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    display: block;
+    margin: .25em;
+    text-align: center;
+    background: -webkit-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%);
+    border-radius: .15em;
+    position: relative;
+    box-shadow: none;
+    text-shadow: none;
+    transition: all .25s linear;
+}
+
+.button:hover{
+    color: #000;
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.25);
+    text-shadow: 1px 1px rgba(255,255,255,0.5), -1px -1px rgba(0,0,0,0.25);
+}
+
+.small:hover{
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+
+.button:hover #add{
+   text-shadow: -1px -1px rgba(0,0,0,0.5);;
+}
+
+#add{
+    display: none;
+    background: #444444;
+    color:#fff;
+    padding:.2em;
+    border-radius:100%;
+    display: inline-block;
+    height: 10px;
+    width:9px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -9px;
+    line-height:0.66em;
+    text-shadow: 1px 1px rgba(0,0,0,0.5);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+#actions li{
+    float: left; 
+    width: 49.5%; 
+    position: relative; 
+    margin: 0.125% 0.25% 0 0.25%;
+}
+
+#saveInfo, #loadInfo{
+    position: absolute; 
+    background: white;
+    width:50%; 
+    left: 50%; 
+    margin: 1em 0 0 -28%;
+    z-index: 1;
+    color: black;
+    top: -500%;
+    padding: 1em;
+    border-radius: 1em;
+    transition: all .25s ease;
+    opacity: 0;
+}
+
+#saveInfo:before, #loadInfo:before{
+    content: '';
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    top: -10px;
+    border-width: 0 10px 10px 10px;
+    border-style: none solid solid solid;
+    border-color: transparent transparent #fff transparent;
+}
+
+#noteText{
+    width: 100%;
+    box-sizing: border-box; 
+    resize: none; 
+    min-height: 50px;
+    border: 1px solid rgba(0,0,0,0.5);
+    background: rgba(255,255,255,0.5);
+}
+
+.textButtons li{
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.textButtons a{
+    display: block;
+    margin:2px;
+    padding:2px;
+}
+
+.noteTpl{display: none;}
+
+/**
+ * Tablets & netbooks
+ */
+@media screen and (min-width: 768px){
+    .note{width: 49%; float: left; margin: 1% 0.5% 0 0.5%;}
+}
+
+/**
+ * Larger screens. Desktops/Laptops
+ */
+@media screen and (min-width: 1024px){
+    h1{font-size:4em; line-height: 1.5em;}
+    .note{width: 23.8%; float: left; margin: 1% 0 1% 1%;}
+    #actions li{float: left; width: 23.8%; margin: 1% 0 .5% 1%;}
+    #actions li:last-child{}
+}
+
+/* 
+@media only screen and (min-width: 18em) { h1 { font-size: 2em; line-height: 1.25em; } }
+@media only screen and (min-width: 19em) { h1 { font-size: 2.090909090909091em; line-height: 1.2414772727272727em; } }
+@media only screen and (min-width: 20em) { h1 { font-size: 2.1818181818181817em; line-height: 1.2329545454545454em; } }
+@media only screen and (min-width: 21em) { h1 { font-size: 2.2727272727272725em; line-height: 1.2244318181818181em; } }
+@media only screen and (min-width: 22em) { h1 { font-size: 2.3636363636363638em; line-height: 1.2159090909090908em; } }
+@media only screen and (min-width: 23em) { h1 { font-size: 2.4545454545454546em; line-height: 1.2073863636363635em; } }
+@media only screen and (min-width: 24em) { h1 { font-size: 2.5454545454545454em; line-height: 1.1988636363636365em; } }
+@media only screen and (min-width: 25em) { h1 { font-size: 2.6363636363636362em; line-height: 1.1903409090909092em; } }
+@media only screen and (min-width: 26em) { h1 { font-size: 2.7272727272727275em; line-height: 1.1818181818181819em; } }
+@media only screen and (min-width: 27em) { h1 { font-size: 2.8181818181818183em; line-height: 1.1732954545454546em; } }
+@media only screen and (min-width: 28em) { h1 { font-size: 2.909090909090909em; line-height: 1.1647727272727273em; } }
+@media only screen and (min-width: 29em) { h1 { font-size: 3em; line-height: 1.15625em; } }
+@media only screen and (min-width: 30em) { h1 { font-size: 3.090909090909091em; line-height: 1.1477272727272727em; } }
+@media only screen and (min-width: 31em) { h1 { font-size: 3.1818181818181817em; line-height: 1.1392045454545454em; } }
+@media only screen and (min-width: 32em) { h1 { font-size: 3.2727272727272725em; line-height: 1.1306818181818181em; } }
+@media only screen and (min-width: 33em) { h1 { font-size: 3.3636363636363633em; line-height: 1.1221590909090908em; } }
+@media only screen and (min-width: 34em) { h1 { font-size: 3.4545454545454546em; line-height: 1.1136363636363638em; } }
+@media only screen and (min-width: 35em) { h1 { font-size: 3.5454545454545454em; line-height: 1.1051136363636365em; } }
+@media only screen and (min-width: 36em) { h1 { font-size: 3.6363636363636367em; line-height: 1.0965909090909092em; } }
+@media only screen and (min-width: 37em) { h1 { font-size: 3.7272727272727275em; line-height: 1.0880681818181819em; } }
+@media only screen and (min-width: 38em) { h1 { font-size: 3.8181818181818183em; line-height: 1.0795454545454546em; } }
+@media only screen and (min-width: 39em) { h1 { font-size: 3.909090909090909em; line-height: 1.0710227272727273em; } }
+@media only screen and (min-width: 40em) { h1 { font-size: 4em; line-height: 1.0625em; } }
+
+*/

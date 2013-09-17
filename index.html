@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NoteToSelf</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=BenchNine:400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/index.css">
+        <script src="js/NoteToSelf.js"></script>
+    </head>
+    <body>
+        <header class="title">
+            <h1>Note To Self</h1>
+            
+            <ul id="actions">
+                <li>
+                    <a href="#" id="addNote" class="button" title="Add a New Note">
+                        Add Note
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="saveNotes" class="button" title="Save Notes to server-side database">
+                        Save Notes
+                    </a>
+                    <span id="saveInfo">Attempting to save to database...</span>
+                </li>
+                <li>
+                    <a href="#" id="loadNotes" class="button" title="Load notes from server-side database">
+                        Load Notes 
+                    </a>
+                    <span id="loadInfo">Attempting to load from database...</span>
+                </li>
+                <li>
+                    <a href="#" id="clearNotes" class="button" title="Clear all notes" onclick="clearNotes();">
+                        Clear All
+                    </a>
+                </li>
+            </ul>
+        </header>
+        
+        <section id="notesContainer">
+           
+            <article class="note noteTpl">
+                <textarea id="noteText" placeholder="Begin typing your note here"></textarea>
+                <ul class="textButtons">
+                    <li><a href="#" class="button" onclick="saveText();">Save</a></li>
+                    <li><a href="#" class="button" onclick="cancelText();">Cancel</a></li>
+                </ul>
+            </article>
+
+        </section>
+        <script>
+            /**
+             * Populate the DOM with notes if already present in storage
+             */
+            (function populateContainer(){
+                var st = NoteToSelf.getStorage();
+                for(var i in st)
+                {
+                    $('.noteTpl').clone()
+                                 .prependTo('#notesContainer');
+                         
+                    $('.noteTpl').first()
+                                 .html(st[i])
+                                 .append('<span class="close" data-id="'+i+'">X</span>')
+                                 .removeClass('noteTpl');
+                }
+            })();
+            
+            var isEdit = false;
+            
+            /**
+             * Insert new note form
+             */
+            $("#addNote").click(function(){
+                if(isEdit === false)
+                {
+                    isEdit = true;
+                    $('.noteTpl').clone().prependTo('#notesContainer');
+                    $('.noteTpl:first-of-type').fadeIn('fast', function(){
+                        $(this).removeClass('noteTpl');
+                        $("#noteText").focus();
+                    });
+                }
+            });
+            
+            /**
+            * Remove item from storage and DOM
+            */
+            $('.close').click(function(){
+                var noteID = $(this).data('id');
+                NoteToSelf.remove(noteID);
+                $(this).parent('article').fadeOut(function(){
+                    $(this).remove();
+                });
+            });
+            
+            /**
+             * Attempt to save notes to MySQL database. Calls userNotes PHP class
+             * via ajax, which returns response in JSON
+             */
+            $("#saveNotes").click(function(){
+                $.ajax({
+                    type: "POST",
+                    url: 'user.php',
+                    data: {action: "save", notes: NoteToSelf.getStorage()},
+                    beforeSend: function(){
+                        $('#saveInfo').animate({
+                            top: "66%"
+                        }, 100, function(){
+                            $(this).css({"opacity":1,"top":"100%"});
+                        });
+                    }
+                }).done(function(response){
+                    $("#saveInfo").text(response);
+                    setTimeout(function(){
+                        $("#saveInfo").css({"opacity":0,"top":"-500%"});
+                    }, 2500);
+                });
+            });
+            
+            /**
+            * Attempt to load saved notes from MySQL database 
+            */
+            $("#loadNotes").click(function(){
+                $.ajax({
+                    type: "POST",
+                    url: 'user.php',
+                    data: {action: "load", notes: NoteToSelf.getStorage()},
+                    beforeSend: function(){
+                        $('#loadInfo').animate({
+                            top: "66%"
+                        }, 1, function(){
+                            $(this).css({"opacity":1,"top":"100%"});
+                        });
+                    }
+                }).done(function(response){
+                    var jresponse = JSON.parse(response);
+                    if(jresponse.error)
+                    {
+                        $("#loadInfo").text(jresponse.error);
+                    }
+                    else
+                    {
+                        $("#loadInfo").text('Sucessfully loaded your notes!');
+                        loadFromDB(jresponse.notes);
+                    }
+                    setTimeout(function(){
+                        $("#loadInfo").css({"opacity":0,"top":"-500%"});
+                    }, 2500);
+                });
+            });
+            
+           /**
+            * Remove a note base on its ID
+            */
+            function removeNote(noteID){
+                NoteToSelf.remove(noteID);
+                $('span[data-id='+noteID+']').parent('article').fadeOut(function(){
+                    $(this).remove();
+                });
+            }
+            
+            /**
+             * Attempt to add a note to the container.
+             * @param string note
+             */
+            function saveText(note){
+                var note = note || $("#noteText").val();
+                var id = NoteToSelf.count();
+                if(note !== ''){
+                    NoteToSelf.add(note);
+                    $('article').first().html(note);
+                    $('article').first().removeClass('noteTpl').append('<span class="close" data-id="' + id  + '" onclick="removeNote('+id+');">X</span>');
+                    isEdit = false;
+                }else
+                {
+                    alert('Your note is blank!');
+                }
+            }
+            
+            /**
+             * Cancel 'Add Note'
+             */
+            function cancelText(){
+               $('article').first().fadeOut('slow', function(){
+                   $(this).remove();
+               });
+               isEdit = false;
+            }
+            
+            /**
+             * populate the container using notes from database opposed to local storage
+             * @param object notes
+             */
+            function loadFromDB(notes){
+                clearNotes();
+                var notes = JSON.parse(notes);
+                for(var i in notes)
+                {
+                    $('.noteTpl').clone().prependTo('#notesContainer');
+                    saveText(notes[i]);
+                }
+            }
+            
+            /**
+             * Reset localStorage and empty the notes container
+             */
+            function clearNotes(){
+                localStorage.setItem('NoteToSelf',JSON.stringify([]));
+                $('#notesContainer').children('article').not('.noteTpl').remove();
+            }
+        </script>
+    </body>
+</html>
