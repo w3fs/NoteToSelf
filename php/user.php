@@ -93,46 +93,57 @@ class userNotes{
     }
 }
 /**
- * Grab post vars and ip for use as an ID
+ * End userNotes class
  */
-$action = $_POST['action'];
-$notes = isset($_POST['notes']) ? $_POST['notes'] : NULL;
-$id = $_SERVER['REMOTE_ADDR'];
 
 /**
- * Is this a legitimate request?
+ * Make sure this is a POST request, otherwise, it is likely not coming
+ * from the application.
  */
-if(in_array($action,array('save','load')))
+if($_POST)
 {
-    try{
-        /**
-         * Instantiate object. If the action is a save/update, return the string response. If the action
-         * is load then return results(error or notes from DB) in JSON format
-         */
-        $userNotes = new userNotes();
-        
-        if($action === 'save')
-        {
-            $response = $userNotes->userSave($id,$notes);
-            echo $response;
-        }
-        else
-        {
-            $response = $userNotes->userExists($id);
-            if($response)
+    /**
+     * Grab post vars and ip for use as an ID
+     */
+    $action = $_POST['action'];
+    $notes = isset($_POST['notes']) ? $_POST['notes'] : NULL;
+    $id = $_SERVER['REMOTE_ADDR'];
+    
+    /**
+     * Is this a legitimate request?
+     */
+    if(in_array($action,array('save','load')))
+    {
+        try{
+            /**
+             * Instantiate object. If the action is a save/update, return the string response. If the action
+             * is load then return results(error or notes from DB) in JSON format
+             */
+            $userNotes = new userNotes();
+            
+            if($action === 'save')
             {
-                print_r(json_encode($response->fetch(PDO::FETCH_OBJ)));
-            }else
-            {
-                print_r(json_encode(array('error'=>'Sorry, you don\'t seem to have any saved notes!')));
+                $response = $userNotes->userSave($id,$notes);
+                echo $response;
             }
+            else
+            {
+                $response = $userNotes->userExists($id);
+                if($response)
+                {
+                    print_r(json_encode($response->fetch(PDO::FETCH_OBJ)));
+                }else
+                {
+                    print_r(json_encode(array('error'=>'Sorry, you don\'t seem to have any saved notes!')));
+                }
+            }
+            
+        } catch(Exception $e) {
+            print_r(json_encode(array('error'=>$e->getMessage())));
         }
-        
-    } catch(Exception $e) {
-        print_r(json_encode(array('error'=>$e->getMessage())));
     }
-}
-else
-{
-    echo 'Invalid action...what are you trying to do?!';
+    else
+    {
+        echo 'Invalid action...what are you trying to do?!';
+    }
 }
