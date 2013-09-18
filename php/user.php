@@ -5,9 +5,9 @@ class userNotes{
     /**
      * Database connection credentials
      */
-    public $dbUser = 'root';
-    public $dbPass = 'sk8jager';
-    public $dbHost = 'localhost';
+    public $dbUser = 'username';
+    public $dbPass = 'password';
+    public $dbHost = 'host';
     public $dbPort = null;
     
     /**
@@ -23,7 +23,7 @@ class userNotes{
     public $dsn;
     
     /**
-     * Holyds PDO object
+     * Holds PDO object
      * @var PDO 
      */
     public $conn;
