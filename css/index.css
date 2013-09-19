@@ -27,8 +27,8 @@ h1{ /* Google Webfont API */
 }
 
 .note{
-    width: 98%;
-    margin: 1% 1% 1% 1%;
+    width: 97%;
+    margin: 1.5% 1.5% 1.5% 1.5%;
     color: #1D171F;
     padding:0.4em;
     border-radius: 2px;
@@ -72,12 +72,13 @@ h1{ /* Google Webfont API */
     font-size:1.3em;
     color: #1D171F;
     line-height:1.25em;
-    padding: 0.5em 3em 0.5em 2em;
+    padding: 0.5em 0;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     display: block;
     margin: .25em;
     text-align: center;
     border-radius: .15em;
+    white-space: nowrap;
     position: relative;
     box-shadow: none;
     text-shadow: none;
