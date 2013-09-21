@@ -9,6 +9,7 @@
 */
 var SearchBar = {
 	initialize : function(searchInput, contentFilter){
+		this.contentFilter = contentFilter;
 		this.content = $(contentFilter);
 		$(searchInput).change(this.cbSearch())
 			.keyup(this.cbSearch());
@@ -24,7 +25,13 @@ var SearchBar = {
 			},[ words[aWord] ]);
 		}	
 	},
-
+	updateContent: function(contentFilter){
+		if(typeof(contentFilter)=="undefined")
+			contentFilter = this.contentFilter
+		else
+			this.contentFilter = contentFilter;
+		this.content = $(contentFilter);
+	},
 	//callBack
 	cbSearch : function(){
 		return function(event) {

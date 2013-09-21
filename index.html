@@ -70,6 +70,7 @@
                                  .append('<span class="close" data-id="'+i+'">X</span>')
                                  .removeClass('noteTpl');
                 }
+                SearchBar.initialize($("#search input"), '#notesContainer .note:not(.noteTpl)');
             })();
             
             var isEdit = false;
@@ -98,6 +99,7 @@
                 $(this).parent('article').fadeOut(function(){
                     $(this).remove();
                 });
+                SearchBar.updateContent();
             });
             
             /**
@@ -178,6 +180,7 @@
                     $('article').first().html(note);
                     $('article').first().removeClass('noteTpl').append('<span class="close" data-id="' + id  + '" onclick="removeNote('+id+');">X</span>');
                     isEdit = false;
+                    SearchBar.updateContent();
                 }else
                 {
                     alert('Your note is blank!');
@@ -214,9 +217,9 @@
             function clearNotes(){
                 localStorage.setItem('NoteToSelf',JSON.stringify([]));
                 $('#notesContainer').children('article').not('.noteTpl').remove();
+                SearchBar.updateContent();
             }
 
-            SearchBar.initialize($("#search input"), '#notesContainer .note:not(.noteTpl)');
         </script>
     </body>
 </html>

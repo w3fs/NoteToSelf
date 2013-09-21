@@ -121,12 +121,10 @@ h1{ /* Google Webfont API */
 }
 
 #search{
-    margin: 1% 1.3%;
-
-    width: 97.2%;
+    padding:1em 0;
 }
 #search input{
-    width:100%;
+    width:95%;
 
     font-size:1.2em;
     color: #1D171F;
@@ -134,7 +132,7 @@ h1{ /* Google Webfont API */
     padding: 0.3em 0;
     box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.3);
     display: block;
-    margin: .25em;
+    margin: auto;
     text-align: center;
     border-radius: .15em;
     white-space: nowrap;
