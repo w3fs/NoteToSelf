@@ -150,6 +150,13 @@ h1{ /* Google Webfont API */
     
     background: #eee;
 }
+.note{
+    -webkit-transition : width 0.2s linear, opacity 0.25s ease-in-out;
+    -moz-transition :    width 0.2s linear, opacity 0.25s ease-in-out;
+    -o-transition :      width 0.2s linear, opacity 0.25s ease-in-out;
+    transition :         width 0.2s linear, opacity 0.25s ease-in-out; 
+}
+
 
 #saveInfo, #loadInfo{
     position: absolute; 
@@ -220,4 +227,15 @@ h1{ /* Google Webfont API */
     h1{font-size:4em; line-height: 1.5em;}
     .note{width: 23.8%; float: left; margin: 1% 0 1% 1%;}
     #actions li{float: left; width: 23.8%; margin: 1% 0 .5% 1%;}
+}
+
+.SearchBar_notfind{
+    /* */
+     display: none;
+    
+    /*  WORKS TOO ! Test it :)  * /
+
+    opacity:0.2;
+    width:10%;
+    /* */
 }
