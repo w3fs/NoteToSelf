@@ -8,6 +8,7 @@
         <link href='http://fonts.googleapis.com/css?family=BenchNine:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/index.css">
         <script src="js/NoteToSelf.js"></script>
+        <script src="js/SearchBar.js"></script>
     </head>
     <body>
         <header class="title">
@@ -37,6 +38,9 @@
                     </a>
                 </li>
             </ul>
+            <div id="search">
+                <input type="text" value="" name="search" id="searchNotes" placeholder="Find in a note" />
+            </div>
         </header>
         
         <section id="notesContainer">
@@ -211,6 +215,8 @@
                 localStorage.setItem('NoteToSelf',JSON.stringify([]));
                 $('#notesContainer').children('article').not('.noteTpl').remove();
             }
+
+            SearchBar.initialize($("#search input"), '#notesContainer .note:not(.noteTpl)');
         </script>
     </body>
 </html>
